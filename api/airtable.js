@@ -55,6 +55,23 @@ export default async function handler(req, res) {
     }
   }
 
+  if (req.method === 'PATCH') {
+    try {
+      const { table, records } = req.body;
+      const tableId = tables[table];
+      if (!tableId) return res.status(400).json({ error: 'Unknown table: ' + table });
+      const r = await fetch(`https://api.airtable.com/v0/${BASE}/${tableId}`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ records })
+      });
+      const j = await r.json();
+      return res.status(200).json(j);
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
   if (req.method === 'DELETE') {
     try {
       const { table, recordId } = req.body;
