@@ -17,6 +17,7 @@ export default async function handler(req, res) {
     reuniones: 'tblgzlkV38z38u3sb'
   };
 
+  // GET = read all tables
   if (req.method === 'GET') {
     try {
       const data = {};
@@ -38,6 +39,7 @@ export default async function handler(req, res) {
     }
   }
 
+  // POST = write to a table (for creating solicitudes, etc)
   if (req.method === 'POST') {
     try {
       const { table, fields } = req.body;
@@ -45,7 +47,10 @@ export default async function handler(req, res) {
       if (!tableId) return res.status(400).json({ error: 'Unknown table: ' + table });
       const r = await fetch(`https://api.airtable.com/v0/${BASE}/${tableId}`, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ fields })
       });
       const j = await r.json();
@@ -55,6 +60,7 @@ export default async function handler(req, res) {
     }
   }
 
+  // PATCH = update records in a table
   if (req.method === 'PATCH') {
     try {
       const { table, records } = req.body;
@@ -62,7 +68,10 @@ export default async function handler(req, res) {
       if (!tableId) return res.status(400).json({ error: 'Unknown table: ' + table });
       const r = await fetch(`https://api.airtable.com/v0/${BASE}/${tableId}`, {
         method: 'PATCH',
-        headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ records })
       });
       const j = await r.json();
@@ -72,6 +81,7 @@ export default async function handler(req, res) {
     }
   }
 
+  // DELETE = delete a record from a table
   if (req.method === 'DELETE') {
     try {
       const { table, recordId } = req.body;
@@ -79,7 +89,9 @@ export default async function handler(req, res) {
       if (!tableId) return res.status(400).json({ error: 'Unknown table: ' + table });
       const r = await fetch(`https://api.airtable.com/v0/${BASE}/${tableId}/${recordId}`, {
         method: 'DELETE',
-        headers: { Authorization: `Bearer ${TOKEN}` }
+        headers: {
+          Authorization: `Bearer ${TOKEN}`
+        }
       });
       const j = await r.json();
       return res.status(200).json(j);
