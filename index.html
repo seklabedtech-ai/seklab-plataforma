@@ -62,8 +62,8 @@ var[solMsg,setSolMsg]=useState("");
 var today=new Date().toISOString().slice(0,10);
 var isA=user&&user.rol==="admin";var isDemo=user&&user.rol==="demo";var[demoMode,setDemoMode]=useState("startup");var isS=(user&&user.rol==="startup")||(isDemo&&demoMode==="startup");var isM=(user&&user.rol==="mentor")||(isDemo&&demoMode==="mentor");
 var sh=function(m){setToast(m);setTimeout(function(){setToast("")},2500)};
-var fSt=useMemo(function(){return S.filter(function(s){return!sr||s.n.toLowerCase().includes(sr.toLowerCase())})},[sr]);
-var fMe=useMemo(function(){return M.filter(function(m){if(sr&&!m.n.toLowerCase().includes(sr.toLowerCase())&&!(m.b||"").toLowerCase().includes(sr.toLowerCase()))return false;if(af&&!m.a.includes(af))return false;if(sf&&m.s!==sf)return false;return true})},[sr,af,sf]);
+var fSt=useMemo(function(){return S.filter(function(s){return!sr||s.n.toLowerCase().includes(sr.toLowerCase())})},[S,sr]);
+var fMe=useMemo(function(){return M.filter(function(m){if(sr&&!m.n.toLowerCase().includes(sr.toLowerCase())&&!(m.b||"").toLowerCase().includes(sr.toLowerCase()))return false;if(af&&!m.a.includes(af))return false;if(sf&&m.s!==sf)return false;return true})},[M,sr,af,sf]);
 var allA=useMemo(function(){return[...new Set(M.flatMap(function(m){return m.a}))].sort()},[]);
 var allSols=[].concat(solSM).concat(solMS);
 var pend=allSols.filter(function(s){return s.st==="Pendiente"}).length;
@@ -119,4 +119,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(
 </script>
 </body>
 </html>
- 
