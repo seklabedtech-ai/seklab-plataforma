@@ -14,7 +14,8 @@ export default async function handler(req, res) {
     eventos: 'tblovE0Ga2S2qhVxL',
     solicitudes: 'tblkkwjbiNnY3mZ8B',
     usuarios: 'tblVFVmfcqNS6xYKp',
-    reuniones: 'tblgzlkV38z38u3sb'
+    reuniones: 'tblgzlkV38z38u3sb',
+    formaciones: 'tblrAs1KsaGFueJca'
   };
 
   // GET = read all tables
