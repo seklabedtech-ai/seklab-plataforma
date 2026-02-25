@@ -15,7 +15,8 @@ export default async function handler(req, res) {
     solicitudes: 'tblkkwjbiNnY3mZ8B',
     usuarios: 'tblVFVmfcqNS6xYKp',
     reuniones: 'tblgzlkV38z38u3sb',
-    formaciones: 'tblrAs1KsaGFueJca'
+    formaciones: 'tblrAs1KsaGFueJca',
+    disponibilidad: 'tblodTweV5x8YyZjQ'
   };
 
   // GET = read all tables
